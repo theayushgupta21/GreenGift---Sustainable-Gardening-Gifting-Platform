@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ShoppingCart, Search, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 
 export default function Navbar() {
     return (
@@ -37,18 +37,18 @@ export default function Navbar() {
                 </nav>
 
                 <div className="flex items-center gap-2">
-                    <Button variant="outline" className="hidden md:flex">
+                    <button className="hidden md:flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-green-700">
                         English / हिंदी
-                    </Button>
+                    </button>
 
-                    <Button className="bg-green-700 hover:bg-green-800">
+                    <button className="bg-green-700 hover:bg-green-800 text-white flex items-center gap-2 py-2 px-4 rounded-lg">
                         <ShoppingCart className="mr-2 h-5 w-5" />
                         Cart (2)
-                    </Button>
+                    </button>
 
-                    <Button variant="outline" size="icon" className="md:hidden">
+                    <button className="md:hidden">
                         <Menu />
-                    </Button>
+                    </button>
                 </div>
             </div>
         </header>
