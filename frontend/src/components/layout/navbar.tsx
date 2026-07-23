@@ -9,9 +9,10 @@ import { IoSearch } from "react-icons/io5";
 
 export default function Navbar() {
     const [language, setLanguage] = useState("en");
+    const [active, setActive] = useState("login");
     return (
         <>
-            <header className=" bg-green-800 py-3 px-6 rounded-3xl m-1 flex justify-between items-center">
+            <header className=" bg-green-900 py-3 px-6   flex justify-between items-center">
                 <div className="flex items-center gap-2">
                     <GiLeafSwirl className="text-black text-2xl transition-transform duration-300 hover:scale-110 cursor-pointer" />
                     <h1 className="text-yellow-200 text-2xl font-bold  transition-transform duration-300 hover:scale-110 cursor-pointer">GreenGift</h1>
@@ -44,26 +45,30 @@ export default function Navbar() {
 
                 </div>
 
-                <div
-                    onClick={() => setLanguage(language === "en" ? "hi" : "en")}
-                    className="relative flex items-center w-28 h-10 bg-green-100 rounded-full cursor-pointer p-1 transition-all duration-300"
-                >
-                    {/* Sliding Button */}
-                    <div
-                        className={`absolute top-1 w-12 h-8 rounded-full bg-green-600 shadow-md transition-all duration-300 ${language === "en" ? "left-1" : "left-15"
+
+
+                <div className="flex items-center gap-2 translate-x-3">
+                    <Link
+                        href="/login"
+                        onClick={() => setActive("login")}
+                        className={`px-4 py-2 rounded-full transition-all duration-300 ${active === "login"
+                            ? "text-green-400 font-semibold"
+                            : "text-white hover:text-green-200"
                             }`}
-                    />
+                    >
+                        Login
+                    </Link>
 
-                    {/* Labels */}
-                    <div className="flex justify-between w-full px-3 z-10 text-sm font-semibold">
-                        <span className={language === "en" ? "text-white" : "text-gray-700"}>
-                            ENG
-                        </span>
-
-                        <span className={language === "hi" ? "text-white" : "text-gray-700"}>
-                            हिंदी
-                        </span>
-                    </div>
+                    <Link
+                        href="/signup"
+                        onClick={() => setActive("signup")}
+                        className={`px-4 py-2 rounded-full transition-all duration-300 ${active === "signup"
+                            ? "text-green-400 font-semibold"
+                            : "text-white hover:text-green-200"
+                            }`}
+                    >
+                        Sign Up
+                    </Link>
                 </div>
 
 
