@@ -1,5 +1,6 @@
 
 import Navbar from "@/components/layout/navbar";
+import Approutes from "../../app.routes/Approutes";
 
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
     <>
       <main>
 
-        <Navbar />
+        <Approutes />
 
 
 
