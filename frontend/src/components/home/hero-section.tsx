@@ -26,7 +26,7 @@ export default function HeroSlider() {
             navigation
             loop
             className="h-150 w-full bg-transparent mx-20 relative"
-        >ive
+        >
             {images.map((img, index) => (
                 <SwiperSlide key={index}>
                     <div className="relative w-full h-150 ">
