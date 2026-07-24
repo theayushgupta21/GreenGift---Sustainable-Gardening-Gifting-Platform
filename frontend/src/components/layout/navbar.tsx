@@ -1,67 +1,76 @@
 "use client"
 
 import React from 'react'
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { GiLeafSwirl } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
+import { Globe, ChevronDown } from "lucide-react";
 
 export default function Navbar() {
-    const [language, setLanguage] = useState("en");
+    const [language, setLanguage] = useState("EN");
+    const [langDropdownOpen, setLangDropdownOpen] = useState(false);
     const [active, setActive] = useState("login");
     const location = useLocation();
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setLangDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     const isLinkActive = (path: string) => {
         return location.pathname === path;
     };
 
     return (
-        <header className="bg-emerald-950/95 backdrop-blur-md sticky top-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center border-b border-emerald-900 shadow-md">
-            <div className="flex items-center gap-2">
+        <header className="bg-emerald-950/95 backdrop-blur-md sticky top-0 z-50 py-4 px-6 md:px-12 flex justify-between md:grid md:grid-cols-3 items-center border-b border-emerald-900 shadow-md">
+            <div className="flex items-center gap-2 justify-self-start">
                 <Link to="/" className="flex items-center gap-2">
                     <GiLeafSwirl className="text-emerald-400 text-2xl transition-transform duration-300 hover:rotate-45 cursor-pointer" />
-                    <h1 className="text-yellow-200 text-xl font-bold transition-transform duration-300 hover:scale-105 cursor-pointer">GreenGift</h1>
+                    <h1 className="text-yellow-200 text-xl font-bold transition-transform duration-300 hover:scale-105 cursor-pointer">GreenGift.Ai</h1>
                 </Link>
             </div>
 
-            <nav className="hidden md:block">
+            <nav className="hidden md:block justify-self-center">
                 <ul className="flex gap-8 text-sm font-semibold text-white/90">
                     <li>
-                        <Link 
-                            to="/" 
-                            className={`hover:text-emerald-300 transition-colors duration-200 ${
-                                isLinkActive("/") ? "text-emerald-400 font-bold" : "text-white"
-                            }`}
+                        <Link
+                            to="/"
+                            className={`hover:text-emerald-300 transition-colors duration-200 ${isLinkActive("/") ? "text-emerald-400 font-bold" : "text-white"
+                                }`}
                         >
                             Home
                         </Link>
                     </li>
                     <li>
-                        <Link 
-                            to="/store" 
-                            className={`hover:text-emerald-300 transition-colors duration-200 ${
-                                isLinkActive("/store") ? "text-emerald-400 font-bold" : "text-white"
-                            }`}
+                        <Link
+                            to="/store"
+                            className={`hover:text-emerald-300 transition-colors duration-200 ${isLinkActive("/store") ? "text-emerald-400 font-bold" : "text-white"
+                                }`}
                         >
                             Store
                         </Link>
                     </li>
                     <li>
-                        <Link 
-                            to="/about" 
-                            className={`hover:text-emerald-300 transition-colors duration-200 ${
-                                isLinkActive("/about") ? "text-emerald-400 font-bold" : "text-white"
-                            }`}
+                        <Link
+                            to="/about"
+                            className={`hover:text-emerald-300 transition-colors duration-200 ${isLinkActive("/about") ? "text-emerald-400 font-bold" : "text-white"
+                                }`}
                         >
                             About
                         </Link>
                     </li>
                     <li>
-                        <Link 
-                            to="/contact" 
-                            className={`hover:text-emerald-300 transition-colors duration-200 ${
-                                isLinkActive("/contact") ? "text-emerald-400 font-bold" : "text-white"
-                            }`}
+                        <Link
+                            to="/contact"
+                            className={`hover:text-emerald-300 transition-colors duration-200 ${isLinkActive("/contact") ? "text-emerald-400 font-bold" : "text-white"
+                                }`}
                         >
                             Contact
                         </Link>
@@ -69,7 +78,7 @@ export default function Navbar() {
                 </ul>
             </nav>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 justify-self-end">
                 <div className="hidden sm:flex items-center gap-2 bg-emerald-900/60 border border-emerald-800/60 px-3.5 py-1.5 rounded-full">
                     <input
                         type="search"
@@ -84,21 +93,62 @@ export default function Navbar() {
                     </button>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs">
+                <div className="flex items-center gap-3 text-xs">
+                    {/* Language Selector */}
+                    <div className="relative" ref={dropdownRef}>
+                        <button
+                            type="button"
+                            onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-emerald-900/40 border border-emerald-800/60 text-white hover:text-emerald-300 hover:border-emerald-700/60 transition-all font-semibold cursor-pointer"
+                        >
+                            <Globe className="w-3.5 h-3.5 text-emerald-400" />
+                            <span>{language === "EN" ? "EN" : "हिन्दी"}</span>
+                            <ChevronDown className={`w-3 h-3 text-emerald-400 transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`} />
+                        </button>
+
+                        {langDropdownOpen && (
+                            <div className="absolute right-0 mt-2 w-32 bg-emerald-950 border border-emerald-900 rounded-xl shadow-xl py-1 z-50 overflow-hidden">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setLanguage("EN");
+                                        setLangDropdownOpen(false);
+                                    }}
+                                    className={`w-full text-left px-4 py-2 text-xs transition-colors duration-150 hover:bg-emerald-900 ${
+                                        language === "EN" ? "text-emerald-300 font-bold bg-emerald-900/30" : "text-white"
+                                    }`}
+                                >
+                                    English (EN)
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setLanguage("HI");
+                                        setLangDropdownOpen(false);
+                                    }}
+                                    className={`w-full text-left px-4 py-2 text-xs transition-colors duration-150 hover:bg-emerald-900 ${
+                                        language === "HI" ? "text-emerald-300 font-bold bg-emerald-900/30" : "text-white"
+                                    }`}
+                                >
+                                    Hindi (हिन्दी)
+                                </button>
+                            </div>
+                        )}
+                    </div>
+
                     <Link
-                        to="/contact"
+                        to="/login"
                         onClick={() => setActive("login")}
-                        className={`px-3 py-1.5 rounded-full transition-all duration-200 border border-transparent ${
-                            active === "login"
-                                ? "text-emerald-300 bg-emerald-900/40 font-semibold"
-                                : "text-white hover:text-emerald-200"
-                        }`}
+                        className={`px-3 py-1.5 rounded-full transition-all duration-200 border border-transparent ${active === "login"
+                            ? "text-emerald-300 bg-emerald-900/40 font-semibold"
+                            : "text-white hover:text-emerald-200"
+                            }`}
                     >
                         Login
                     </Link>
 
                     <Link
-                        to="/contact"
+                        to="/signup"
                         onClick={() => setActive("signup")}
                         className={`px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold transition-all duration-200`}
                     >
