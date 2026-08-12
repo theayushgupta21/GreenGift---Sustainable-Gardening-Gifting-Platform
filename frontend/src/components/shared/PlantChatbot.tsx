@@ -2,16 +2,16 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  MessageSquare, 
-  X, 
-  Send, 
-  Bot, 
-  User, 
-  CloudSun, 
-  MapPin, 
-  Heart, 
-  RotateCcw, 
+import {
+  MessageSquare,
+  X,
+  Send,
+  Bot,
+  User,
+  CloudSun,
+  MapPin,
+  Heart,
+  RotateCcw,
   ArrowRight,
   Sparkles,
   HelpCircle,
@@ -142,7 +142,7 @@ export default function PlantChatbot() {
   const [inputValue, setInputValue] = useState("");
   const [currentStep, setCurrentStep] = useState<"none" | "location" | "weather" | "care" | "finished">("none");
   const [selections, setSelections] = useState({ location: "", weather: "", care: "" });
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Global Event Listener to open chatbot from external components
@@ -161,7 +161,7 @@ export default function PlantChatbot() {
       setMessages([
         {
           sender: "bot",
-          text: "Hello! 🌿 I am Leafy, your GreenGift Assistant. Let's find your perfect plant match! Where do you plan to place your plant?",
+          text: "Hello! 🌿 I am Oxywise.AI, your GreenGift Assistant. Let's find your perfect plant match! Where do you plan to place your plant?",
           options: ["Balcony", "Indoor Desk", "Outdoor Garden", "Living Room"],
           type: "selection"
         }
@@ -273,7 +273,7 @@ export default function PlantChatbot() {
   const handleGeneralQuestion = (topic: string) => {
     const cleanTopic = topic.toLowerCase();
     let responseText = "I'm not fully sure about that topic, but you can search our GreenGift store for natural products! Try typing keywords like 'watering', 'soil', 'pests', 'yellow leaves', or 'fertilizer'. 🌸";
-    
+
     // Look up in simple Q&A DB
     for (const key in generalQA) {
       if (cleanTopic.includes(key)) {
@@ -343,11 +343,11 @@ export default function PlantChatbot() {
                   <Bot className="w-5 h-5 text-emerald-300" />
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-sm tracking-wide">Leafy AI 🌿</h3>
+                  <h3 className="font-extrabold text-sm tracking-wide">Oxywise.AI 🌿</h3>
                   <p className="text-[10px] text-emerald-300/80 font-medium">Smart Plant Advisor</p>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="text-emerald-100/60 hover:text-white transition-colors cursor-pointer"
               >
@@ -360,28 +360,25 @@ export default function PlantChatbot() {
               {messages.map((msg, index) => (
                 <div key={index} className="space-y-3">
                   <div
-                    className={`flex items-start gap-2.5 ${
-                      msg.sender === "user" ? "flex-row-reverse" : ""
-                    }`}
+                    className={`flex items-start gap-2.5 ${msg.sender === "user" ? "flex-row-reverse" : ""
+                      }`}
                   >
                     {/* Icon */}
                     <div
-                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-semibold ${
-                        msg.sender === "user"
-                          ? "bg-emerald-600 text-white"
-                          : "bg-emerald-100 text-emerald-800"
-                      }`}
+                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-semibold ${msg.sender === "user"
+                        ? "bg-emerald-600 text-white"
+                        : "bg-emerald-100 text-emerald-800"
+                        }`}
                     >
                       {msg.sender === "user" ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
                     </div>
 
                     {/* Chat Bubble text */}
                     <div
-                      className={`max-w-[75%] p-3.5 rounded-2xl text-xs leading-relaxed shadow-sm ${
-                        msg.sender === "user"
-                          ? "bg-emerald-600 text-white rounded-tr-none font-medium"
-                          : "bg-white border border-emerald-100/60 text-gray-700 rounded-tl-none font-light"
-                      }`}
+                      className={`max-w-[75%] p-3.5 rounded-2xl text-xs leading-relaxed shadow-sm ${msg.sender === "user"
+                        ? "bg-emerald-600 text-white rounded-tr-none font-medium"
+                        : "bg-white border border-emerald-100/60 text-gray-700 rounded-tl-none font-light"
+                        }`}
                     >
                       {msg.text}
                     </div>
