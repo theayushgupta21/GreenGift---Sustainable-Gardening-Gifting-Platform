@@ -334,10 +334,10 @@ export default function PlantChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-24 right-6 w-[90vw] sm:w-[400px] h-[550px] bg-white border border-emerald-100 rounded-3xl shadow-2xl flex flex-col z-50 overflow-hidden"
+            className="fixed bottom-24 right-6 w-[90vw] sm:w-100 h-137.5 bg-white border border-emerald-100 rounded-3xl shadow-2xl flex flex-col z-50 overflow-hidden"
           >
             {/* Chatbot Header */}
-            <div className="bg-gradient-to-r from-emerald-950 to-emerald-900 text-white px-5 py-4 flex items-center justify-between">
+            <div className="bg-linear-to-r from-emerald-950 to-emerald-900 text-white px-5 py-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-400/20 flex items-center justify-center">
                   <Bot className="w-5 h-5 text-emerald-300" />

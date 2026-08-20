@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import ScrollToTop from "@/components/ScrollToTop";
 import Home from "@/pages/Home";
 import Store from "@/pages/Store";
 import About from "@/pages/About";
@@ -34,6 +35,7 @@ export default function AppRoutes() {
 
   return (
     <div className="flex flex-col min-h-screen bg-emerald-50/20 text-gray-800">
+      <ScrollToTop />
       <Navbar />
       <main className="flex-grow">
         <Routes>
@@ -41,7 +43,7 @@ export default function AppRoutes() {
           <Route path="/store" element={<Store />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          
+
           {/* Auth Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/login/admin" element={<AdminLogin />} />

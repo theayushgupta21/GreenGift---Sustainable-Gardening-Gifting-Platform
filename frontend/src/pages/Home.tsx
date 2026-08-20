@@ -3,20 +3,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
-import { 
-  ArrowRight, 
-  ChevronLeft, 
-  ChevronRight, 
-  TreePine, 
-  Flame, 
-  Wind, 
-  Gift, 
-  ShieldCheck, 
-  Leaf, 
-  Truck, 
-  HeartHandshake, 
-  Star, 
-  Quote 
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  TreePine,
+  Flame,
+  Wind,
+  Gift,
+  ShieldCheck,
+  Leaf,
+  Truck,
+  HeartHandshake,
+  Star,
+  Quote
 } from "lucide-react";
 
 // Slide Data
@@ -271,7 +271,7 @@ export default function Home() {
             />
             {/* Dark Green Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-900/60 to-transparent" />
-            
+
             {/* Slide Content */}
             <div className="absolute inset-0 flex items-center">
               <div className="container mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2">
@@ -284,7 +284,7 @@ export default function Home() {
                   >
                     🌿 Eco-Friendly Gifting & Gardening
                   </motion.span>
-                  
+
                   <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -345,11 +345,10 @@ export default function Home() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index 
-                  ? "bg-emerald-400 w-8" 
-                  : "bg-emerald-900/50 hover:bg-emerald-600/50"
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index
+                ? "bg-emerald-400 w-8"
+                : "bg-emerald-900/50 hover:bg-emerald-600/50"
+                }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
@@ -390,10 +389,10 @@ export default function Home() {
                 </div>
                 <div className="space-y-2">
                   <div className="text-4xl lg:text-5xl font-black text-emerald-300">
-                    <AnimatedCounter 
-                      value={stat.value} 
-                      suffix={stat.suffix} 
-                      prefix={stat.prefix} 
+                    <AnimatedCounter
+                      value={stat.value}
+                      suffix={stat.suffix}
+                      prefix={stat.prefix}
                       isFloat={stat.isFloat}
                     />
                   </div>
