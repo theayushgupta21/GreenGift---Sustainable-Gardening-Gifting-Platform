@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { User, Key, ArrowLeft, Loader2, Sparkles, CheckCircle2 } from "lucide-react";
+import GoogleAuthButton from "@/components/auth/GoogleAuthButton";
 
 export default function UserLogin() {
   const navigate = useNavigate();
@@ -12,6 +13,17 @@ export default function UserLogin() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+
+  const handleGoogleLogin = () => {
+    const googleAuthUrl = process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL;
+
+    if (!googleAuthUrl) {
+      setError("Google sign-in is not configured yet. Please use email and password.");
+      return;
+    }
+
+    window.location.assign(googleAuthUrl);
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,6 +100,15 @@ export default function UserLogin() {
                     {error}
                   </motion.div>
                 )}
+
+                <div className="space-y-4">
+                  <GoogleAuthButton onClick={handleGoogleLogin} />
+                  <div className="flex items-center gap-3 text-[10px] text-gray-400 uppercase tracking-wider">
+                    <div className="h-px flex-1 bg-emerald-100" />
+                    <span>or sign in manually</span>
+                    <div className="h-px flex-1 bg-emerald-100" />
+                  </div>
+                </div>
 
                 <form onSubmit={handleLogin} className="space-y-5">
                   <div className="space-y-1.5">

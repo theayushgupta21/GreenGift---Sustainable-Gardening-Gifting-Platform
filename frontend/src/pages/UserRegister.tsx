@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { User, Mail, Phone, Lock, ArrowLeft, Loader2, CheckCircle2 } from "lucide-react";
+import GoogleAuthButton from "@/components/auth/GoogleAuthButton";
 
 export default function UserRegister() {
   const navigate = useNavigate();
@@ -15,6 +16,17 @@ export default function UserRegister() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+
+  const handleGoogleSignup = () => {
+    const googleAuthUrl = process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL;
+
+    if (!googleAuthUrl) {
+      setError("Google sign-up is not configured yet. Please register manually.");
+      return;
+    }
+
+    window.location.assign(googleAuthUrl);
+  };
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
@@ -103,6 +115,15 @@ export default function UserRegister() {
                     {error}
                   </motion.div>
                 )}
+
+                <div className="space-y-4">
+                  <GoogleAuthButton onClick={handleGoogleSignup} />
+                  <div className="flex items-center gap-3 text-[10px] text-gray-400 uppercase tracking-wider">
+                    <div className="h-px flex-1 bg-emerald-100" />
+                    <span>or register manually</span>
+                    <div className="h-px flex-1 bg-emerald-100" />
+                  </div>
+                </div>
 
                 <form onSubmit={handleRegister} className="space-y-4">
                   {/* Name field */}

@@ -11,7 +11,7 @@ export default function Navbar() {
     const [language, setLanguage] = useState("EN");
     const [langDropdownOpen, setLangDropdownOpen] = useState(false);
     const [active, setActive] = useState("login");
-    const location = useLocation();
+    const { pathname } = useLocation();
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -25,8 +25,8 @@ export default function Navbar() {
     }, []);
 
     const isLinkActive = (path: string) => {
-        return location.pathname === path;
-    };
+    return pathname === path;
+};
 
     return (
         <header className="bg-emerald-950/95 backdrop-blur-md sticky top-0 z-50 py-4 px-6 md:px-12 flex justify-between md:grid md:grid-cols-3 items-center border-b border-emerald-900 shadow-md">
