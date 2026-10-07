@@ -241,7 +241,7 @@ npm run start
 ```
 
 The backend currently has no working `dev` or `start` script. Its existing test
-script is a placeholder and does not execute a test suite.
+script is a placeholder and does not execute a test suite.fucl
 
 ## Authentication
 
